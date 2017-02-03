@@ -29,6 +29,12 @@ To add new video of interviews with transcription:
 - To generate the video transcription json, use [autoEdit][autoEdit], and in export options chose Json.
 - Also export the video webm preview or make mp4 video preview using [miro converter][miroConverter]
 - Modify the json to add url to where you are hosting the video. `videoOgg`
+
+<!-- To get video id from vimeo :
+`https://player.vimeo.com/video/<vimeoVideoId>/config` 
+
+is the `url` key after the  `mime":"video/mp4"` -->
+
 - also add an audio file `audioFile`
 - add thumnail image in json + link to where you hosting image. using as key `thumbnail`
 - add vimeo id to json. eg if url is [https://vimeo.com/128977725](https://vimeo.com/128977725) then the id is `128977725`.
