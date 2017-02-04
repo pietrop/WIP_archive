@@ -1,16 +1,8 @@
 # excluding anything that is not README or the docs file for now untill get a better/faster connection 
 
-config
-lib
+
+
 node_modules
-nwjs
-vendor
-.eslintrc.json
-appdmg.json
-build.js
-config.js
-LICENCE.md
-package.json
 
 
 #ignore config file
