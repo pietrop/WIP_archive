@@ -239,7 +239,7 @@ var config = require('../../../config');
 
 // http://backbonejs.org/#Model
 module.exports = Backbone.Model.extend({
-  idAttribute: '_id',
+  // idAttribute: '_id',
   urlRoot: path.join(config.serverUrl, 'transcription'),
   defaults: {
     // title: 'Default Title ',
@@ -655,19 +655,19 @@ __p+='\n';
  if(status) { 
 __p+='\n    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" id="transcriptionCard">\n\n     <img src='+
 ((__t=( thumbnail ))==null?'':__t)+
-' class="img-responsive">\n       <h4 type="button" class="btn btn-lg btn-link showBtn controls" >'+
+' class="img-responsive">\n       <h4  class="showBtn" ><a hre="">'+
 ((__t=( title ))==null?'':__t)+
-'</h4>\n      <h5>'+
+'</a></h4>\n      <h5>'+
 ((__t=( jobTitle ))==null?'':__t)+
 '</h5>\n      <!-- trying to make sure all boxes are alligned with this quick fix -->\n      ';
  if(description.length > 51){ 
-__p+='\n      \t<p>'+
+__p+='\n      <!-- \t<p>'+
 ((__t=( description.substring(0,51) ))==null?'':__t)+
-' <a href="">...</a></p>\n      ';
+' <a href="">...</a></p>  -->\n      ';
  }else{ 
-__p+='\n      \t<p>'+
+__p+='\n      <!-- \t<p>'+
 ((__t=( description ))==null?'':__t)+
-'</p>\n     ';
+'</p>  -->\n     ';
  } 
 __p+='\n  </div><!-- col -->\n ';
  } 
@@ -699,11 +699,13 @@ __p+='\n     <!-- Repeating audio code -->\n        <!-- progress circle line if
  }else{ 
 __p+=' <!-- else if using safari  -->\n\n        <!-- if video has been processed -->\n        <video id="'+
 ((__t=( 'videoId_'+ id ))==null?'':__t)+
-'" poster="" width="100%" controls webkit-playsinline>\n          ';
+'" poster="'+
+((__t=( thumbnail ))==null?'':__t)+
+'" width="100%" controls webkit-playsinline>\n          ';
  if(videoOgg) { 
 __p+='\n          <!-- TODO: video type should be a var, videoOgg var should be changed to videoHTML5?or add new line with webm? -->\n            <source src="'+
 ((__t=( videoOgg ))==null?'':__t)+
-'" type="video/webm">\n              ';
+'" type="video/mp4">\n              ';
  }else{ 
 __p+='\n            <source src="" type="video/ogg">\n              ';
  }
@@ -713,21 +715,27 @@ __p+=' <!-- if using safari  -->\n<!-- ///////////////////////// -->\n  ';
  }else { 
 __p+='\n    <p>Media preview not ready </p>\n  ';
  } 
-__p+='\n</div>\n\n\n      </div>\n     <!-- <hr>  -->\n  <div class="row">\n        <p> \n\n    <!-- Transcription -->\n    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">\n      <div class="panel panel-default">\n        <div class="panel-heading hidden-print">\n          <div class="row">\n          <div class="col-xs-12 col-sm-7 col-lg-7 col-xl-7">\n         \n\n<a type="button" id="clearHighlights" class="btn btn-default" >\n<!-- hilighter icon -->\n<!-- end hilighter icon -->\n Clear highlights\n </a>\n\n <!-- Button trigger modal -->\n<button type="button" class="btn btn-primary hidden-print" data-toggle="modal" data-target="#exportModal">\n  Export <span class="glyphicon glyphicon-save"></span>\n</button>\n\n          </div>\n          <!-- search box -->\n          <div class="">\n            <!--  <div class="input-group">\n             <span class="input-group-addon">\n               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>\n             </span>\n            <input type="text" class="form-control" id="searchCurrentTranscription" placeholder="Find in transcript"> \n            </div> -->\n          </div>  \n          \n          </div>\n          <!-- end search box -->\n        </div>\n        <div class="panel-body transcription">\n          <!-- Paragaph module -->\n          ';
+__p+='\n</div>\n\n\n      </div>\n     <!-- <hr>  -->\n  <div class="row">\n        \n\n\n<!-- Under the video   -->\n\n<!-- Description   -->\n        <!-- <img src="http://placehold.it/750x750" class="img-responsive"> -->\n        <h3>'+
+((__t=( title ))==null?'':__t)+
+'</h3>\n        <h5>'+
+((__t=( jobTitle ))==null?'':__t)+
+'</h5>\n       <p> '+
+((__t=( description ))==null?'':__t)+
+'</p>\n\n      <!-- end Description   -->\n<!-- End of Under the video    -->\n\n        \n        </div>\n      </div>\n\n      <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">\n      \n<!-- Left side of the video -->\n          <!-- Transcription -->\n    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">\n      <div class="panel panel-default">\n        <div class="panel-heading hidden-print">\n          <div class="row">\n            <!-- <div class="col-xs-12 col-sm-7 col-lg-7 col-xl-7">-->\n         \n\n<div class="btn-group btn-group-justified hidden-print ">\n<a type="button" id="clearHighlights" class="btn btn-xs btn-default" >Clear highlights</a>\n<a type="button" class="btn btn-xs btn-default " data-toggle="modal" data-target="#exportModal">Export <span class="glyphicon glyphicon-save"></span>\n</a>\n</div>\n\n\n\n\n <!-- Button trigger modal -->\n\n\n         <!-- </div>-->\n          <!-- search box -->\n          <div class="">\n            <!--  <div class="input-group">\n             <span class="input-group-addon">\n               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>\n             </span>\n            <input type="text" class="form-control" id="searchCurrentTranscription" placeholder="Find in transcript"> \n            </div> -->\n          </div>  \n          \n          </div>\n          <!-- end search box -->\n        </div>\n        <div class="panel-body transcription">\n          <!-- Paragaph module -->\n          ';
  _.each(text, function(paragraph) { 
-__p+='\n          <dl class="dl-horizontal">\n            <dt>'+
+__p+='\n         <!-- <dl class="dl-horizontal">-->\n         <!--   <dt>'+
 ((__t=( paragraph.speaker ))==null?'':__t)+
-'\n               </dt> <dt>\n              <!-- fir is the first  -->\n              <a data-start-time="'+
+'-->\n             <!--  </dt> <dt>-->\n              <!-- fir is the first  -->\n          <!--    <a data-start-time="'+
 ((__t=( paragraph.paragraph[0].line[0].startTime ))==null?'':__t)+
 '" data-video-id="'+
 ((__t=( 'videoId_'+ id  ))==null?'':__t)+
 '" class="timecodes">'+
 ((__t=( fromSeconds(paragraph.paragraph[0].line[0].startTime) ))==null?'':__t)+
-'</a>\n            </dt>\n              ';
+'</a>-->\n         <!--   </dt>-->\n              ';
  _.each(paragraph.paragraph, function(lines) { 
 __p+='\n              ';
  _.each(lines, function(line) { 
-__p+='\n            <dd >\n              <!--  <p class="lines" contenteditable="false"> -->\n                ';
+__p+='\n           <!-- <dd >-->\n              <!--  <p class="lines" contenteditable="false"> -->\n                ';
  _.each(line, function(word) { 
 __p+='\n                  <span contenteditable="false" \n                        class="words text-muted" data-transcription-id="'+
 ((__t=( id ))==null?'':__t)+
@@ -759,19 +767,13 @@ __p+='\n                  <span contenteditable="false" \n                      
 ((__t=( word.text ))==null?'':__t)+
 ' </span>\n                  ';
  }) 
-__p+='\n           <!--    </p> -->\n           </dd>\n             ';
+__p+='\n           <!--    </p> -->\n          <!-- </dd>-->\n             ';
  }) 
 __p+='\n            ';
  }) 
-__p+='\n          </dl>\n          ';
+__p+='\n         <!-- </dl>-->\n          ';
  }) 
-__p+='\n          <!-- ./paragraph module -->\n      </div>\n    </div>\n    </div><!-- ./col transcription-->\n\n\n\n        </p>\n        </div>\n      </div>\n\n      <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">\n      <!-- Description   -->\n        <!-- <img src="http://placehold.it/750x750" class="img-responsive"> -->\n        <h3>'+
-((__t=( title ))==null?'':__t)+
-'</h3>\n        <h5>'+
-((__t=( jobTitle ))==null?'':__t)+
-'</h5>\n       <p> '+
-((__t=( description ))==null?'':__t)+
-'</p>\n\n      <!-- end Description   -->\n      </div>\n    </div>\n</div>\n\n\n\n\n<!-- Export Modal -->\n<div class="modal fade hidden-print" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel">\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        <h4 class="modal-title" id="exportModalLabel">Export Options</h4>\n      </div>\n      <div class="modal-body">\n       <!-- Export options -->\n        <h2><small>Video sequence </small></h2>\n        <p>You can export an EDL (edit decision list) to open a video sequence of text selections in the video editing software. See the user manual for more on this \n         <a id="edlUserManualInfo" <span  class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>.\n        <p>You can export your selections for a video sequence in chronological order or in the order in which you selected them.</p> \n        <!-- Btn Edl - chronological order | -->\n\n        <p><a id="exportEdlChronological" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>\n          EDL  - Chronological order\n        </a>\n\n        <!-- Btn EDL - selection order  -->\n        <a id="exportEdlSelectionOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>\n          EDL - selection order \n        </a></p>\n\n        <hr>\n        <h2><small>Captions </small></h2>\n\n        <p>Export captions of the full transcription </p>\n\n        <!-- Btn Captions - srt -->\n        <p><a id="expoertCaptionsSrt" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-subtitles" aria-hidden="true"></span>\n          Captions - srt\n        </a></p>\n\n        <hr>\n        <h2><small>Plain text  </small></h2>\n\n        <p>You can export the text of the full transcription as plain text without timecodes.</p>\n\n        <!-- Btn Plain text transcription. -->\n        <p><a id="exportPlainText" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Plain text transcription\n        </a></p>\n         \n        <p>You can also export timecoded plain text of the full transcription.</p>\n\n        <!-- Btn  Timecoded plain text transcription. -->\n        <p><a id="exportTimecodedTranscription" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Timecoded plain text transcription\n        </a></p>\n\n        <h2><small>Plain text - Selections </small> </h2>\n\n       <p>You can receive your text selections as plain text in chronological or selection order without timecodes.</p>\n\n        <!-- Btn Plain Text Chronological -->\n        <a id="exportPlainTextEDL" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Plain Text EDL Chronological \n        </a>\n        <!-- Btn Plain Text Selection Order -->\n        <a id="exportPlainTextEDLSelOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Plain Text EDL Selection Order\n        </a>\n        <br> <br>\n         <p> You can get your text selections as plain text in chronological or selection order with timecodes.</p>\n\n        <!-- Btn Timecoded Plain Text Chronological -->\n        <p><a id="exportPlainTimecodedTextEDL" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Timecoded Text EDL Chronological\n        </a>\n\n        <!-- Btn Timecoded Plain Text Selection Order -->\n        <a id="exportPlainTimecodedTextEDLSelOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Timecoded Text EDL Selection Order\n        </a></p>\n\n        <hr>\n\n        <h2><small>Developer’s options </small> </h2>\n        <p>These are additional advanced export options for developers.</p>\n\n        <h3><small>Json </small></h3>\n        <p>JSON of full transcription </p>\n\n        <!-- Btn Json of transcription  -->\n        <p><a id="exportJsonTranscription" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>\n          Json of transcription\n        </a></p>\n\n        <p>You can export a JSON of selections in chronological order as they appear in the video. This is equivalent to EDL Chronological order.</p>\n\n        <!-- Btn Json  EDL Chronological -->\n        <p><a id="exportJsonEDLSelOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>\n          Json  EDL Chronological \n        </a>\n\n        <!-- Btn Json  EDL Selection order -->\n        <a id="exportJsonEDL" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>\n            Json  EDL Selection order\n        </a></p>\n\n        <p>You can export a JSON of selections in order they where selected. This is equivalent to EDL selection order.</p>\n\n\n        ';
+__p+='\n          <!-- ./paragraph module -->\n      </div>\n    </div>\n    </div><!-- ./col transcription-->\n\n\n      <!-- End of Left side of the video-->\n      </div>\n    </div>\n</div>\n\n\n\n\n<!-- Export Modal -->\n<div class="modal fade hidden-print" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel">\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        <h4 class="modal-title" id="exportModalLabel">Export Options</h4>\n      </div>\n      <div class="modal-body">\n       <!-- Export options -->\n        <h2><small>Video sequence </small></h2>\n        <p>You can export an EDL (edit decision list) to open a video sequence of text selections in the video editing software. See the user manual for more on this \n         <a id="edlUserManualInfo" <span  class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>.\n        <p>You can export your selections for a video sequence in chronological order or in the order in which you selected them.</p> \n        <!-- Btn Edl - chronological order | -->\n\n        <p><a id="exportEdlChronological" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>\n          EDL  - Chronological order\n        </a>\n\n        <!-- Btn EDL - selection order  -->\n        <a id="exportEdlSelectionOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>\n          EDL - selection order \n        </a></p>\n\n        <hr>\n        <h2><small>Captions </small></h2>\n\n        <p>Export captions of the full transcription </p>\n\n        <!-- Btn Captions - srt -->\n        <p><a id="expoertCaptionsSrt" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-subtitles" aria-hidden="true"></span>\n          Captions - srt\n        </a></p>\n\n        <hr>\n        <h2><small>Plain text  </small></h2>\n\n        <p>You can export the text of the full transcription as plain text without timecodes.</p>\n\n        <!-- Btn Plain text transcription. -->\n        <p><a id="exportPlainText" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Plain text transcription\n        </a></p>\n         \n        <p>You can also export timecoded plain text of the full transcription.</p>\n\n        <!-- Btn  Timecoded plain text transcription. -->\n        <p><a id="exportTimecodedTranscription" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Timecoded plain text transcription\n        </a></p>\n\n        <h2><small>Plain text - Selections </small> </h2>\n\n       <p>You can receive your text selections as plain text in chronological or selection order without timecodes.</p>\n\n        <!-- Btn Plain Text Chronological -->\n        <a id="exportPlainTextEDL" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Plain Text EDL Chronological \n        </a>\n        <!-- Btn Plain Text Selection Order -->\n        <a id="exportPlainTextEDLSelOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Plain Text EDL Selection Order\n        </a>\n        <br> <br>\n         <p> You can get your text selections as plain text in chronological or selection order with timecodes.</p>\n\n        <!-- Btn Timecoded Plain Text Chronological -->\n        <p><a id="exportPlainTimecodedTextEDL" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Timecoded Text EDL Chronological\n        </a>\n\n        <!-- Btn Timecoded Plain Text Selection Order -->\n        <a id="exportPlainTimecodedTextEDLSelOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>\n          Timecoded Text EDL Selection Order\n        </a></p>\n\n        <hr>\n\n        <h2><small>Developer’s options </small> </h2>\n        <p>These are additional advanced export options for developers.</p>\n\n        <h3><small>Json </small></h3>\n        <p>JSON of full transcription </p>\n\n        <!-- Btn Json of transcription  -->\n        <p><a id="exportJsonTranscription" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>\n          Json of transcription\n        </a></p>\n\n        <p>You can export a JSON of selections in chronological order as they appear in the video. This is equivalent to EDL Chronological order.</p>\n\n        <!-- Btn Json  EDL Chronological -->\n        <p><a id="exportJsonEDLSelOrder" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>\n          Json  EDL Chronological \n        </a>\n\n        <!-- Btn Json  EDL Selection order -->\n        <a id="exportJsonEDL" class="btn btn-primary btn-sm">\n          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>\n            Json  EDL Selection order\n        </a></p>\n\n        <p>You can export a JSON of selections in order they where selected. This is equivalent to EDL selection order.</p>\n\n\n        ';
  if (!window.userAgentSafari) { /* Safari and IE don't support the download attribute */ 
 __p+='\n        <h3><small>HTML5 Media</small></h3>\n\n        <p>You can export HTML5 audio and video previews generated by the app. </p>\n\n        <p>\n          <!-- Btn HTML5 Webm video -->\n          <a id="exporthtml5Video" class="btn btn-primary btn-sm"\n            ';
  if (processedVideo) { 
@@ -803,7 +805,7 @@ var _ = require("underscore");
 module.exports = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<br><br><br><br>\n<div class="container">\n\n\n<!-- Center Video -->\n\n<!-- .col-xs-  .col-sm-  .col-md-  .col-lg- -->\n\n<div class="row">\n  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8\n  col-xs-offset-2\n   col-sm-offset-2 col-md-offset-2  col-lg-offset-2">\n<div class="embed-responsive embed-responsive-16by9">\n  <iframe class="embed-responsive-item" width="100%"  src="https://player.vimeo.com/video/47937268?title=0&byline=0&portrait=0"></iframe>\n</div>\n</div> <!-- col -->\n\n</div> <!-- row -->\n\n\n<!-- Center Video End -->\n\n\n<!-- Description -->\n<br>\n<br>\n  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10\n  col-xs-offset-1\n   col-sm-offset-1 col-md-offset-1  col-lg-offset-1">\n<p class="lead text-justify">The Whistleblower Interview Project is a documentary archive of interviews with people who have made public interest disclosures. In these interviews they discuss why and how they blew the whistle, the consequences of their actions, and what their feelings are now. This project has brought their stories to thousands who would not otherwise know of the importance of what they do, the sacrifices they often made, and some of the important lessons learned.</p>\n<!-- End Description -->\n</div> <!-- col -->\n\n</div>\n';
+__p+='<br><br><br><br>\n<div class="container">\n\n\n<!-- Center Video -->\n\n<!-- .col-xs-  .col-sm-  .col-md-  .col-lg- -->\n\n<div class="row">\n  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8\n  col-xs-offset-2\n   col-sm-offset-2 col-md-offset-2  col-lg-offset-2">\n\n\n   <video  poster="https://i.vimeocdn.com/video/457873402.webp" width="100%" controls webkit-playsinline>\n    <source src="https://player.vimeo.com/external/47937268.hd.mp4?s=0fb7066ed054d49607824b62730f84118554a470&profile_id=113" type="video/mp4">\n  </video>\n\n\n\n</div> <!-- col -->\n\n</div> <!-- row -->\n\n\n<!-- Center Video End -->\n\n\n<!-- Description -->\n<br>\n<br>\n  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10\n  col-xs-offset-1\n   col-sm-offset-1 col-md-offset-1  col-lg-offset-1">\n<p class="lead text-justify">The Whistleblower Interview Project is a documentary archive of interviews with people who have made public interest disclosures. In these interviews they discuss why and how they blew the whistle, the consequences of their actions, and what their feelings are now. This project has brought their stories to thousands who would not otherwise know of the importance of what they do, the sacrifices they often made, and some of the important lessons learned.</p>\n<!-- End Description -->\n</div> <!-- col -->\n\n</div>\n';
 }
 return __p;
 };
