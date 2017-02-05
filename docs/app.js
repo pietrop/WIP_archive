@@ -689,15 +689,7 @@ __p+='\n   \n     <div class="alert alert-success alert-dismissible" role="alert
 ((__t=( audioFile ))==null?'':__t)+
 '" type="audio/wav">\n          Your browser does not support the audio element.\n      </audio>\n  ';
  }else if (processedVideo) { 
-__p+='\n\n<!-- ///////////////////////// -->\n      <!-- if using safari on ios  -->\n     ';
- if (window.userAgentSafari) { 
-__p+='\n     <!-- Repeating audio code -->\n        <!-- progress circle line if type of media is video -->\n      <audio id="'+
-((__t=( 'videoId_'+ id ))==null?'':__t)+
-'"   width="10%" controls>\n        <source src="'+
-((__t=( audioFile ))==null?'':__t)+
-'" type="audio/wav">\n          Your browser does not support the audio element.\n      </audio>\n      <!-- end repeating audio code -->\n\n     ';
- }else{ 
-__p+=' <!-- else if using safari  -->\n\n        <!-- if video has been processed -->\n        <video id="'+
+__p+='\n\n\n        <!-- if video has been processed -->\n        <video id="'+
 ((__t=( 'videoId_'+ id ))==null?'':__t)+
 '" poster="'+
 ((__t=( thumbnail ))==null?'':__t)+
@@ -709,18 +701,16 @@ __p+='\n          <!-- TODO: video type should be a var, videoOgg var should be 
  }else{ 
 __p+='\n            <source src="" type="video/ogg">\n              ';
  }
-__p+='\n              Your browser does not support the video tag.\n          </video>\n\n     ';
- }
-__p+=' <!-- if using safari  -->\n<!-- ///////////////////////// -->\n  ';
+__p+='\n              Your browser does not support the video tag.\n          </video>\n\n<!-- ///////////////////////// -->\n  ';
  }else { 
 __p+='\n    <p>Media preview not ready </p>\n  ';
  } 
 __p+='\n</div>\n\n\n      </div>\n     <!-- <hr>  -->\n  <div class="row">\n        \n\n\n<!-- Under the video   -->\n\n<!-- Description   -->\n        <!-- <img src="http://placehold.it/750x750" class="img-responsive"> -->\n        <h3>'+
 ((__t=( title ))==null?'':__t)+
 '</h3>\n        <h5>'+
-((__t=( jobTitle ))==null?'':__t)+
+((__t=( _.escape(jobTitle) ))==null?'':__t)+
 '</h5>\n       <p> '+
-((__t=( description ))==null?'':__t)+
+((__t=( _.escape(description) ))==null?'':__t)+
 '</p>\n\n      <!-- end Description   -->\n<!-- End of Under the video    -->\n\n        \n        </div>\n      </div>\n\n      <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">\n      \n<!-- Left side of the video -->\n          <!-- Transcription -->\n    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">\n      <div class="panel panel-default">\n        <div class="panel-heading hidden-print">\n          <div class="row">\n            <!-- <div class="col-xs-12 col-sm-7 col-lg-7 col-xl-7">-->\n         \n\n<div class="btn-group btn-group-justified hidden-print ">\n<a type="button" id="clearHighlights" class="btn btn-xs btn-default" >Clear highlights</a>\n<a type="button" class="btn btn-xs btn-default " data-toggle="modal" data-target="#exportModal">Export <span class="glyphicon glyphicon-save"></span>\n</a>\n</div>\n\n\n\n\n <!-- Button trigger modal -->\n\n\n         <!-- </div>-->\n          <!-- search box -->\n          <div class="">\n            <!--  <div class="input-group">\n             <span class="input-group-addon">\n               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>\n             </span>\n            <input type="text" class="form-control" id="searchCurrentTranscription" placeholder="Find in transcript"> \n            </div> -->\n          </div>  \n          \n          </div>\n          <!-- end search box -->\n        </div>\n        <div class="panel-body transcription">\n          <!-- Paragaph module -->\n          ';
  _.each(text, function(paragraph) { 
 __p+='\n         <!-- <dl class="dl-horizontal">-->\n         <!--   <dt>'+

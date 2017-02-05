@@ -1,7 +1,5 @@
 # excluding anything that is not README or the docs file for now untill get a better/faster connection 
 
-
-
 node_modules
 
 
