@@ -874,7 +874,7 @@ module.exports = Backbone.View.extend({
 
   },
   events:{
-    "click #transcriptionCard": "showTranscription",
+    "click .transcriptionCard": "showTranscription",
     "click button.editBtn": "editTranscription",
     "click button.deleteBtn": "deleteTranscription"
   },
