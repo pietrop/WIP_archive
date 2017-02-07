@@ -653,7 +653,7 @@ var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments
 with(obj||{}){
 __p+='\n';
  if(status) { 
-__p+='\n    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" id="transcriptionCard">\n\n     <img src='+
+__p+='\n    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 transcriptionCard">\n\n     <img src='+
 ((__t=( thumbnail ))==null?'':__t)+
 ' class="img-responsive">\n       <h4  class="showBtn" ><a hre="">'+
 ((__t=( title ))==null?'':__t)+

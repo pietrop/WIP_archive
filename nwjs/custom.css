@@ -209,8 +209,10 @@ audio {
 }
 
 
-#transcriptionCard {
+.transcriptionCard {
    cursor: pointer;
+    height: 300px;
+    text-overflow: ellipsis;
 }
 
 
